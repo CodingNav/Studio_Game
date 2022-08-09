@@ -18,8 +18,15 @@ class Player
         @name = name.capitalize
         @health = health
     end
+
+    attr_accessor :name
+    attr_reader :health
+
+    def score 
+        @name.length + @health
+    end
     def to_s
-        "I'm #{@name} with a health of #{@health}"
+        "I'm #{@name} with a health of #{@health} and a score of #{score}"
     end
     def w00t
         @health += 15
