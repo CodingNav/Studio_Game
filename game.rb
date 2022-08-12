@@ -4,15 +4,31 @@ require_relative 'game_turn'
 
 class Game
 
+    attr_reader :title
+
     def initialize(title)
         @title = title
         @players = []
     end
 
-    attr_reader :title
-
     def add_player(a_player)
         @players.push(a_player)
+    end
+
+    def print_stats
+        strong_players, wimpy_players = @players.partition { |n| n.strong?}
+
+        puts "\n#{@title} Statistics"
+
+        puts "\n#{strong_players.size} strong players:"
+        strong_players.each do |player|
+            puts "#{player.name} (#{player.health})"
+        end
+
+        puts "\n#{wimpy_players.size} wimpy players:"
+        wimpy_players.each do |player|
+            puts "#{player.name} (#{player.health})"
+        end
     end
 
     def play(rounds)
