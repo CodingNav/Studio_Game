@@ -20,6 +20,10 @@ class Game
         puts "#{player.name} (#{player.health})"
     end
 
+    def total_points
+        @players.reduce(0) { |sum, player| sum + player.points }
+    end
+
     def print_stats
         strong_players, wimpy_players = @players.partition { |n| n.strong?}
 
@@ -35,6 +39,11 @@ class Game
             print_name_and_health(player)
         end
 
+        puts "\n#{total_points} total points from treasures found"
+        @players.each do |player|
+          puts "\n#{player.name}'s point totals:"
+          puts "#{player.points} grand total points"
+        end
 
         puts "\n#{title} High Scores:"
        @players.sort.each do |player| 
@@ -46,9 +55,8 @@ class Game
     treasures = TreasureTrove::TREASURES
     puts "\nThere are #{treasures.size} treasures to be found:"
     treasures.each do |treasure|
-        puts "A #{treasure.name} is worth #{treasure.points} points"
+        puts "A #{treasure.name} is worth #{treasure.points} points\n"
     end
-    puts "\n"
 
     def play(rounds)
         puts "There are #{@players.size} players in #{@title}:"
