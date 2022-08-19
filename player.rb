@@ -52,6 +52,11 @@ class Player
   def to_s
     "I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}."
   end
+
+  def self.from_csv(string)
+    name, health = string.split(',')    
+    new(name, Integer(health))
+  end
 end
 
 if __FILE__ == $0
